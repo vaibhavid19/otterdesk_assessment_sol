@@ -6,7 +6,6 @@ import com.otterdesk.pdfWorkerService.model.PdfEvent;
 import com.otterdesk.pdfWorkerService.service.PdfEventSender;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.amqp.core.Message;
@@ -18,6 +17,9 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.util.ErrorHandler;
 
+/* This is a listener piece. This file along with RabbitConfiguration.class in another project will act as
+listener on another port and is able to listen to the message sent by PdfEventSenderController
+ */
 @SpringBootApplication
 public class PdfWorkerServiceApplication {
 
@@ -26,7 +28,6 @@ public class PdfWorkerServiceApplication {
 	public static void main(String[] args) {
 
 		SpringApplication.run(PdfWorkerServiceApplication.class, args);
-
 
 		final ApplicationContext rabbitConfig = new AnnotationConfigApplicationContext(RabbitConfiguration.class);
 		final ConnectionFactory rabbitConnectionFactory = rabbitConfig.getBean(ConnectionFactory.class);

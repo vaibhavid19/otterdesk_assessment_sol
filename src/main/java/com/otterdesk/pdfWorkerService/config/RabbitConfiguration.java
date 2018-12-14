@@ -50,14 +50,14 @@ public class RabbitConfiguration {
     }
 
     @Bean
-    public MessageConverter jsonMessageConverter(){
+    public MessageConverter jMessageConverter(){
         return new Jackson2JsonMessageConverter();
     }
 
     @Bean
     public RabbitTemplate rabbitTemplate() {
         RabbitTemplate template = new RabbitTemplate(connectionFactory());
-        template.setMessageConverter(jsonMessageConverter());
+        template.setMessageConverter(jMessageConverter());
         template.setRoutingKey(this.queueName);
         template.setQueue(this.queueName);
         return template;
